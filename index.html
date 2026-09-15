@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Always Give Back | Veteran Charity for Free Custom PCs</title>
+<meta name="description" content="Always Give Back (AGB) is a Canton, Ohio veteran charity providing free custom-built computers, tech literacy training, free tech support, and community connection to U.S. veterans. Over 200 builds delivered, funded and tracked entirely in public." />
+<link rel="canonical" href="https://alwaysgiveback.org/" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://alwaysgiveback.org/" />
+<meta property="og:title" content="Always Give Back | Veteran Charity for Free Custom PCs" />
+<meta property="og:description" content="We build more than computers. We build a way forward. Over 200 free custom computers delivered to veterans since 2019, funded and tracked entirely in public." />
+<meta property="og:image" content="https://alwaysgiveback.org/images/og-image.svg" />
+<meta property="og:image:alt" content="Always Give Back: free custom-built computers for veterans. EIN 42-1953879." />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Public+Sans:wght@400;700;900&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-navy:       #021425;
+  --color-navy-light: #112738;
+  --color-army:       #4A513A;
+  --color-cream:      #EDE5DA;
+  --color-red:        #892F2A;
+  --color-gold:       #D4A860;
+
+  --color-charcoal:   #2F3B41;
+  --color-stone:      #8B9092;
+  --color-taupe:      #DAD1C3;
+  --color-olive:      #586363;
+
+  --font-body:    "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", "Public Sans", ui-sans-serif, sans-serif;
+
+  /* Bounded by viewport HEIGHT as well as width: a vw-only clamp sizes the
+     headline for a wide-but-short laptop and pushes the CTA below the fold.
+     The 104px ceiling matters too -- the page container caps at 78rem, so
+     past ~1300px wide extra size only buys extra lines, not extra presence.
+     Weight/tracking/leading below are the landing page's look; only the
+     size scales. */
+  --text-h1: clamp(32px, min(7vw, 8vh), 104px);
+  --text-h1--line-height: 0.92;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h1--font-weight: 800;
+
+  --text-h2: clamp(34px, 5vw, 68px);
+  --text-h2--line-height: 1.0;
+  --text-h2--letter-spacing: -0.025em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 26px;
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.015em;
+  --text-h3--font-weight: 700;
+
+  --text-h4: 19px;
+  --text-h4--line-height: 1.25;
+  --text-h4--letter-spacing: -0.01em;
+  --text-h4--font-weight: 700;
+
+  --text-lead: 20px;
+  --text-lead--line-height: 1.5;
+  --text-lead--font-weight: 400;
+
+  --text-body: 17px;
+  --text-body--line-height: 1.6;
+  --text-body--font-weight: 400;
+
+  --text-small: 14px;
+  --text-small--line-height: 1.45;
+  --text-small--font-weight: 400;
+
+  --text-eyebrow: 13px;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.18em;
+  --text-eyebrow--font-weight: 900;
+
+  --text-label: 13px;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 900;
+
+  --text-stat: clamp(64px, 11vw, 168px);
+  --text-stat--line-height: 0.88;
+  --text-stat--letter-spacing: -0.04em;
+  --text-stat--font-weight: 800;
+
+  --radius-card:  2px;
+  --radius-panel: 4px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-page: 78rem;
+  --container-text: 36rem;
+}
+</style>
+<link rel="stylesheet" href="css/custom.css" />
+
+<script>
+/* Runs before the body paints. Anything animated in from a hidden state has to
+   start hidden in CSS, not in JS: main.js is at the end of <body>, so by the
+   time it arms anything the browser has already painted a full frame of every
+   section in its finished state. That is the flash of finished content -- copy
+   appears, then snaps back to the start and animates in.
+
+   The .js-anim class gates those armed states so they only apply when we can
+   actually animate out of them. The load failsafe covers the CDN going down:
+   without GSAP nothing would ever un-hide the page. */
+(function () {
+  var root = document.documentElement;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  root.classList.add("js-anim");
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      if (typeof window.gsap === "undefined") root.classList.remove("js-anim");
+    }, 100);
+  });
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "Always Give Back",
+  "alternateName": "AGB",
+  "url": "https://alwaysgiveback.org/",
+  "logo": "https://alwaysgiveback.org/images/logo.webp",
+  "description": "A veteran charity based in Canton, Ohio providing free custom-built computers, tech literacy training, free tech support, and community connection to U.S. veterans.",
+  "foundingDate": "2019-11",
+  "taxID": "42-1953879",
+  "address": { "@type": "PostalAddress", "addressLocality": "Canton", "addressRegion": "OH", "addressCountry": "US" },
+  "areaServed": "US",
+  "sameAs": [
+    "https://x.com/AgbCharity",
+    "https://www.tiktok.com/@agbcharity",
+    "https://www.instagram.com/agbcharity/",
+    "https://www.youtube.com/channel/UCdOSYjfe9JgA_jrDhcg9EjQ",
+    "https://kick.com/agb_charity",
+    "https://discord.gg/alwaysgiveback",
+    "https://www.linkedin.com/company/alwaysgiveback",
+    "https://hcb.hackclub.com/always-give-back-military-veterans-charity"
+  ]
+}
+</script>
+</head>
+<body class="overflow-x-hidden bg-navy font-body text-body text-navy antialiased">
+
+<div id="preloader" aria-hidden="true">
+  <span class="font-display font-stretch-expanded text-h3 text-gold">AGB</span>
+</div>
+
+<div class="fixed inset-x-0 top-0 z-[60] h-[3px] bg-cream/10" aria-hidden="true">
+  <div data-scroll-progress class="h-full w-0 bg-gold"></div>
+</div>
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[250] focus:bg-gold focus:px-4 focus:py-2 focus:font-body focus:text-label focus:uppercase focus:text-navy focus:rounded-card">
+  Skip to main content
+</a>
+
+<!-- ============ CHAPTER RAIL ============ -->
+<nav aria-label="Chapters" class="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 rounded-panel bg-navy-light/80 px-3 py-4 backdrop-blur lg:block">
+  <div class="relative flex flex-col items-center gap-5">
+    <span class="pointer-events-none absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-cream/15" aria-hidden="true"></span>
+    <span data-chapter-fill class="pointer-events-none absolute left-1/2 top-0 w-px -translate-x-1/2 bg-gold" style="height:0%" aria-hidden="true"></span>
+    <a data-chapter-link href="#top" aria-label="Chapter 1 of 10, hero" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">Hero</span></a>
+    <a data-chapter-link href="#the-turn" aria-label="Chapter 2 of 10, why we exist" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">Why we exist</span></a>
+    <a data-chapter-link href="#our-mission" aria-label="Chapter 3 of 10, the mission" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">The mission</span></a>
+    <a data-chapter-link href="#what-we-do" aria-label="Chapter 4 of 10, how the mission runs" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">What we do</span></a>
+    <a data-chapter-link href="#support" aria-label="Chapter 5 of 10, how support moves the mission" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">Support</span></a>
+    <a data-chapter-link href="#supporters" aria-label="Chapter 6 of 10, who makes this possible" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">Supporters</span></a>
+    <a data-chapter-link href="#transparency" aria-label="Chapter 7 of 10, transparency" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">Transparency</span></a>
+    <a data-chapter-link href="#story" aria-label="Chapter 8 of 10, why it matters" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">Why it matters</span></a>
+    <a data-chapter-link href="#ways-in" aria-label="Chapter 9 of 10, get involved" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">Get involved</span></a>
+    <a data-chapter-link href="#donate" aria-label="Chapter 10 of 10, the ask" class="group relative z-10 rounded-full p-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span data-chapter-dot class="block h-1.5 w-1.5 rounded-full bg-cream/40 transition-transform duration-300 group-hover:bg-gold"></span><span aria-hidden="true" class="chapter-label font-body text-small uppercase tracking-widest text-cream">The ask</span></a>
+  </div>
+</nav>
+
+<!-- ============ HEADER ============ -->
+<header data-header class="fixed inset-x-0 top-0 z-50 bg-navy-light/90 py-5 backdrop-blur transition-transform duration-500 ease-out-expo">
+  <div class="mx-auto flex w-full max-w-page items-center justify-between px-6 md:px-8">
+    <a href="#top" class="flex items-baseline gap-2">
+      <span class="font-display font-stretch-expanded text-h4 text-gold">AGB</span>
+      <span class="hidden font-body text-small uppercase tracking-widest text-cream/70 sm:inline">Always Give Back</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-8 md:flex">
+      <a data-nav-link href="/programs" class="font-body text-label uppercase text-cream/80 transition-colors hover:text-gold">Programs</a>
+      <a data-nav-link href="/partners" class="font-body text-label uppercase text-cream/80 transition-colors hover:text-gold">Partners</a>
+      <a data-nav-link href="/impact" class="font-body text-label uppercase text-cream/80 transition-colors hover:text-gold">Impact</a>
+      <a data-nav-link href="/apply" class="font-body text-label uppercase text-cream/80 transition-colors hover:text-gold">Apply</a>
+      <a data-nav-link href="/volunteer" class="font-body text-label uppercase text-cream/80 transition-colors hover:text-gold">Volunteer</a>
+      <a data-nav-link href="/contact" class="font-body text-label uppercase text-cream/80 transition-colors hover:text-gold">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href="https://givebutter.com/support-technology-for-veterans-and-active-duty-sbfa4r" target="_blank" rel="noopener noreferrer"
+         class="btn hidden rounded-card bg-gold px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-gold/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:inline-flex">
+        <span class="btn-roll"><span>Donate</span><span aria-hidden="true">Donate</span></span><span class="sr-only"> (opens in new tab)</span>
+      </a>
+      <button data-nav-toggle type="button" aria-expanded="false" aria-controls="mobile-nav"
+        class="inline-flex size-11 items-center justify-center text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold md:hidden">
+        <span class="sr-only">Open menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile nav panel lives OUTSIDE <header> on purpose: main.js applies an
+     inline transform to <header> on scroll (show/hide), and a transformed
+     ancestor becomes the containing block for position:fixed descendants --
+     which collapsed this panel to the header's own ~144px box instead of the
+     full viewport the moment any scroll event fired. Keep it a sibling. -->
+  <div id="mobile-nav" data-nav-panel class="fixed inset-0 z-[70] hidden flex-col gap-8 bg-navy p-8 pt-28 md:hidden" style="background-color:#021425;">
+    <button data-nav-toggle type="button" class="absolute right-6 top-5 inline-flex size-11 items-center justify-center text-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+      <span class="sr-only">Close menu</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+    </button>
+    <nav aria-label="Mobile" class="flex flex-col gap-6">
+      <a href="/programs" class="font-display font-stretch-expanded text-h3 uppercase text-cream hover:text-gold">Programs</a>
+      <a href="/partners" class="font-display font-stretch-expanded text-h3 uppercase text-cream hover:text-gold">Partners</a>
+      <a href="/impact" class="font-display font-stretch-expanded text-h3 uppercase text-cream hover:text-gold">Impact</a>
+      <a href="/apply" class="font-display font-stretch-expanded text-h3 uppercase text-cream hover:text-gold">Apply</a>
+      <a href="/volunteer" class="font-display font-stretch-expanded text-h3 uppercase text-cream hover:text-gold">Volunteer</a>
+    <a href="/contact" class="font-display font-stretch-expanded text-h3 uppercase text-cream hover:text-gold">Contact</a>
+    </nav>
+    <a href="https://givebutter.com/support-technology-for-veterans-and-active-duty-sbfa4r" target="_blank" rel="noopener noreferrer"
+       class="btn mt-4 inline-flex w-fit rounded-card bg-gold px-8 py-4 font-body text-label uppercase text-navy hover:bg-gold/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+      <span class="btn-roll"><span>Donate</span><span aria-hidden="true">Donate</span></span><span class="sr-only"> (opens in new tab)</span>
+    </a>
+  </div>
+
+<main id="main">
+
+<!-- ============ 1. HERO ============ -->
+<section id="top" aria-labelledby="hero-heading" class="hero-section relative isolate flex min-h-screen items-center overflow-hidden bg-linear-to-b from-navy-light to-navy">
+  <svg class="grain pointer-events-none absolute inset-0 -z-10 size-full" aria-hidden="true">
+    <filter id="grainFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter>
+    <rect width="100%" height="100%" filter="url(#grainFilter)" />
+  </svg>
+  <svg data-hero-parallax class="pointer-events-none absolute inset-0 -z-10 size-full opacity-[0.08]" viewBox="0 0 800 600" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="#EDE5DA" stroke-width="1">
+      <line x1="0" y1="100" x2="800" y2="100" /><line x1="0" y1="220" x2="800" y2="220" />
+      <line x1="0" y1="340" x2="800" y2="340" /><line x1="0" y1="460" x2="800" y2="460" />
+      <line x1="0" y1="580" x2="800" y2="580" />
+    </g>
+  </svg>
+  <div data-hero-glow class="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-radial from-gold/20 via-transparent to-transparent blur-2xl" aria-hidden="true"></div>
+
+  <div data-hero-content class="mx-auto w-full max-w-page px-6 md:px-8">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
+      <div class="lg:col-span-12">
+        <p data-hero-fade class="font-body text-eyebrow uppercase text-gold">Military &middot; Veterans &middot; Charity</p>
+        <h1 id="hero-heading" data-split class="hero-h1 font-display font-stretch-expanded text-h1 uppercase text-cream">We build more than computers. We build a way forward.</h1>
+        <p data-hero-fade class="hero-lede max-w-text font-body text-lead text-cream/75">
+          Always Give Back helps veterans reconnect with purpose, opportunity, education, telehealth, gaming communities, and <mark>real human support</mark> &mdash; through custom-built computers and direct community action.
+        </p>
+        <div data-hero-fade class="hero-cta flex flex-wrap items-center gap-6">
+          <a href="https://givebutter.com/support-technology-for-veterans-and-active-duty-sbfa4r" target="_blank" rel="noopener noreferrer"
+             class="btn glow-gold inline-flex items-center justify-center gap-2 rounded-card bg-gold px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-gold/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+            <span class="btn-roll"><span>Donate to a veteran build</span><span aria-hidden="true">Donate to a veteran build</span></span><span class="sr-only"> (opens in new tab)</span>
+          </a>
+          <a href="#ways-in" class="btn inline-flex items-center justify-center gap-2 rounded-card border border-cream/40 px-8 py-4 font-body text-label uppercase text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"><span class="btn-roll"><span>Get involved</span><span aria-hidden="true">Get involved</span></span></a>
+        </div>
+
+        <ul data-hero-fade class="hero-trust flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-cream/15 font-body text-small uppercase tracking-widest text-cream/60">
+          <li>Founded November 2019</li>
+          <li aria-hidden="true" class="text-gold/50">/</li>
+          <li>200+ computers built</li>
+          <li aria-hidden="true" class="text-gold/50">/</li>
+          <li>Canton, OH &middot; Veteran Non-Profit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div data-hero-cue class="absolute inset-x-0 bottom-8 flex flex-col items-center gap-2 text-cream/50">
+    <span class="font-body text-small uppercase tracking-widest">Scroll</span>
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none" aria-hidden="true"><path d="M8 1v20M2 15l6 6 6-6" stroke="currentColor" stroke-width="1.5" /></svg>
+  </div>
+</section>
+
+<!-- ============ 2. THE TURN (pinned + scrubbed: the one cinematic beat) ============
+     Narrative hinge. The hero states what AGB builds; this states why it has to.
+     Held on screen and lit word-by-word so the visitor reads at the page's pace,
+     not their own -- the only place on the site that takes the scroll away. -->
+<section id="the-turn" aria-labelledby="turn-heading" class="relative isolate bg-navy">
+  <svg class="grain pointer-events-none absolute inset-0 -z-10 size-full" aria-hidden="true">
+    <rect width="100%" height="100%" filter="url(#grainFilter)" />
+  </svg>
+  <div data-turn-pin class="relative flex min-h-screen items-center overflow-hidden">
+    <span data-turn-horizon class="pointer-events-none absolute inset-x-0 top-1/2 h-px origin-left bg-linear-to-r from-transparent via-gold/50 to-transparent" aria-hidden="true"></span>
+    <div class="mx-auto w-full max-w-page px-6 md:px-8">
+      <p data-turn-eyebrow class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold">
+        <span class="tabular-nums text-cream/30">01</span><span>Why we exist</span>
+      </p>
+      <h2 id="turn-heading" data-turn-line class="mt-8 max-w-[22ch] font-display font-stretch-expanded text-h2 uppercase text-cream">
+        Always Give Back exists for that moment when a veteran realizes they are <mark>not alone</mark>, and that a community still has their back.
+      </h2>
+      <p data-turn-tail class="mt-10 max-w-text font-body text-lead text-cream/70">
+        Every build starts there.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. OUR MISSION -- set piece: THE COUNT ============
+     The figure takes the whole screen and counts while the section is pinned,
+     then collapses to the corner as the mission copy rises over it. The number
+     is the section's headline, not a statistic beside one. -->
+<section id="our-mission" aria-labelledby="mission-heading" class="relative bg-cream">
+
+  <div data-count-stage class="relative">
+    <!-- The numeral and the copy it makes room for share one pinned viewport.
+         They have to: the collapse is only legible if something takes the
+         space the number vacates. Copy that lives below the pin would leave
+         the back half of the hold as an empty screen. -->
+    <div data-count-pin class="relative flex min-h-screen items-center overflow-hidden">
+      <div data-count-glow class="pointer-events-none absolute left-1/2 top-1/2 size-[60vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-radial from-gold/25 via-transparent to-transparent blur-3xl" aria-hidden="true"></div>
+
+      <!-- absolutely placed so it can travel without shifting the copy -->
+      <div data-count-layer class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        <span data-count-giant aria-hidden="true" class="count-giant block font-display font-stretch-expanded tabular-nums leading-[0.82] text-navy">0</span>
+        <span data-count-caption class="mt-6 block font-body text-eyebrow uppercase text-navy/45">veteran computers built since November 2019</span>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-page px-6 md:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12">
+          <div data-mission-lead class="lg:col-span-6 lg:col-start-7">
+            <p class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-navy/30">02</span><span>The mission</span></p>
+            <p class="sr-only"><span data-count-to="200">200+</span> veteran computers built since November 2019</p>
+            <h2 id="mission-heading" data-split class="mt-6 max-w-text font-display font-stretch-expanded text-h2 uppercase text-navy">
+              A computer is not the mission. It is the <mark>doorway.</mark>
+            </h2>
+            <p class="mt-6 max-w-text font-body text-lead text-navy/75">
+              Technology is the tool. Reconnection is the mission. Veterans deserve more than a thank you &mdash; so Always Give Back backs that up with hardware, community, transparency, and direct action.
+            </p>
+            <a href="#support" class="btn btn--on-light mt-8 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy">
+              <span class="btn-roll"><span>Support the mission</span><span aria-hidden="true">Support the mission</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. WHAT WE DO -- set piece: THE WINDOW ============
+     Two programmes, so the section is built for two rather than inheriting a
+     three-panel stack. Each programme's title is a stencil plate: the real
+     heading is the outlined copy, and an aria-hidden duplicate sitting in the
+     same grid cell is filled by a scene that does NOT travel with the type.
+     Scrolling therefore windows onto a moving world through the letterforms
+     instead of sliding a box across the screen.
+
+     Why two copies rather than one: identical to the .btn-roll idiom already
+     in the system. The real text is always a plain outlined heading, so the
+     content is legible with no JS, no GSAP, and no background-clip support.
+     The fill copy is pure enhancement and is announced to nobody.
+
+     position:sticky, never ScrollTrigger.pin -- the section behaves the same
+     on a phone and a touch user can always flick past it. -->
+<section id="what-we-do" aria-labelledby="what-we-do-heading" class="relative bg-navy">
+  <div class="mx-auto w-full max-w-page px-6 pb-14 pt-24 md:px-8 md:pt-28">
+    <p data-reveal class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-cream/30">03</span><span>How the mission runs</span></p>
+    <h2 data-split id="what-we-do-heading" class="mt-4 max-w-[44rem] font-display font-stretch-expanded text-h2 uppercase text-cream">What we do</h2>
+    <p data-reveal class="mt-6 max-w-text font-body text-lead text-cream/70">
+      Two programmes. One is the reason AGB exists; the other is how its partners show up for the community that funds it.
+    </p>
+  </div>
+
+  <div data-win class="relative">
+
+    <article data-win-panel class="win-panel sticky top-0 flex min-h-screen items-center overflow-hidden bg-navy">
+      <span data-win-scene aria-hidden="true" class="win-scene pointer-events-none absolute inset-0"></span>
+      <svg class="grain pointer-events-none absolute inset-0 size-full" aria-hidden="true">
+        <rect width="100%" height="100%" filter="url(#grainFilter)" />
+      </svg>
+      <span data-win-edge aria-hidden="true" class="absolute inset-x-0 top-0 h-px origin-left bg-cream/15"></span>
+      <span data-win-ghost aria-hidden="true" class="pointer-events-none absolute -right-[5vw] top-1/2 -translate-y-1/2 font-display font-stretch-expanded leading-none text-cream/[0.04]" style="font-size:clamp(280px,40vw,660px)">01</span>
+
+      <div class="relative mx-auto w-full max-w-page px-6 py-24 md:px-8">
+        <p data-win-kicker class="flex items-center gap-4 font-body text-eyebrow uppercase text-gold">
+          <span class="tabular-nums text-cream/35">01</span>
+          <span aria-hidden="true" class="h-px w-12 bg-gold/50"></span>
+          <span>The build programme</span>
+        </p>
+
+        <h3 data-win-title class="win-title mt-8 font-display font-stretch-expanded uppercase">
+          <span class="win-plate">PCs for veterans</span>
+          <span class="win-fill" data-win-fill aria-hidden="true">PCs for veterans</span>
+        </h3>
+
+        <div class="mt-12 grid grid-cols-1 gap-8 border-t border-cream/12 pt-10 lg:grid-cols-12">
+          <div data-win-body class="lg:col-span-6 lg:col-start-7">
+            <p class="font-body text-lead text-cream/75">Total Tech Resources, a Managed IT Service Provider, builds and donates free custom computers to veterans through community donations &mdash; opening the door to education, employment, telehealth, creative work, and <mark>communities that don't disappear after delivery</mark>.</p>
+            <a href="/apply" class="btn mt-10 inline-flex items-center justify-center gap-2 rounded-card border border-cream/30 px-8 py-4 font-body text-label uppercase text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span class="btn-roll"><span>Apply for a PC</span><span aria-hidden="true">Apply for a PC</span></span></a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article data-win-panel class="win-panel win-panel--alt sticky top-0 flex min-h-screen items-center overflow-hidden bg-navy-light">
+      <span data-win-scene aria-hidden="true" class="win-scene pointer-events-none absolute inset-0"></span>
+      <svg class="grain pointer-events-none absolute inset-0 size-full" aria-hidden="true">
+        <rect width="100%" height="100%" filter="url(#grainFilter)" />
+      </svg>
+      <span data-win-edge aria-hidden="true" class="absolute inset-x-0 top-0 h-px origin-left bg-cream/15"></span>
+      <span data-win-ghost aria-hidden="true" class="pointer-events-none absolute -right-[5vw] top-1/2 -translate-y-1/2 font-display font-stretch-expanded leading-none text-cream/[0.04]" style="font-size:clamp(280px,40vw,660px)">02</span>
+
+      <div class="relative mx-auto w-full max-w-page px-6 py-24 md:px-8">
+        <p data-win-kicker class="flex items-center gap-4 font-body text-eyebrow uppercase text-gold">
+          <span class="tabular-nums text-cream/35">02</span>
+          <span aria-hidden="true" class="h-px w-12 bg-gold/50"></span>
+          <span>With our partners</span>
+        </p>
+
+        <h3 data-win-title class="win-title mt-8 font-display font-stretch-expanded uppercase">
+          <span class="win-plate">Partner giveaways</span>
+          <span class="win-fill" data-win-fill aria-hidden="true">Partner giveaways</span>
+        </h3>
+
+        <div class="mt-12 grid grid-cols-1 gap-8 border-t border-cream/12 pt-10 lg:grid-cols-12">
+          <div data-win-body class="lg:col-span-6 lg:col-start-7">
+            <p class="font-body text-lead text-cream/75">Partners contribute products, services, or exclusive experiences as giveaways to the community that funds the builds &mdash; the same businesses listed under <a href="#supporters" class="text-cream link-wipe">supporters</a>, putting something back into the room rather than only into the ledger.</p>
+            <a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="btn mt-10 inline-flex items-center justify-center gap-2 rounded-card border border-cream/30 px-8 py-4 font-body text-label uppercase text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"><span class="btn-roll"><span>Join the Discord</span><span aria-hidden="true">Join the Discord</span></span><span class="sr-only"> (opens in new tab)</span></a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ 5. WHAT SUPPORT BUYS (pinned, scrubbed) ============ -->
+<section id="support" aria-labelledby="support-heading" class="relative bg-navy">
+  <div data-tier-pin class="mx-auto flex min-h-screen w-full max-w-page items-center px-6 py-24 md:px-8">
+    <div class="grid w-full grid-cols-1 gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-6">
+        <p class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-cream/30">04</span><span>How support moves the mission</span></p>
+        <h2 id="support-heading" data-split class="mt-4 font-display font-stretch-expanded text-h2 uppercase text-cream">Your donation turns into real veteran <mark>impact.</mark></h2>
+        <p class="mt-6 max-w-text font-body text-lead text-cream/75">
+          Every dollar pushes a veteran build forward &mdash; from components and shipping to the setup that makes the computer usable on day one.
+        </p>
+        <p class="mt-8 max-w-text font-body text-small text-cream/55">
+          Give at any amount. These are the four points where a donation lands, in the order a build actually needs them.
+        </p>
+        <a href="https://givebutter.com/support-technology-for-veterans-and-active-duty-sbfa4r" target="_blank" rel="noopener noreferrer"
+           class="btn mt-10 inline-flex items-center justify-center gap-2 rounded-card bg-gold px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-gold/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+          <span class="btn-roll"><span>Fund the next build</span><span aria-hidden="true">Fund the next build</span></span><span class="sr-only"> (opens in new tab)</span>
+        </a>
+      </div>
+
+      <div class="relative lg:col-span-5 lg:col-start-8">
+        <svg viewBox="0 0 240 320" class="pointer-events-none absolute -left-6 top-0 hidden h-full w-auto opacity-40 lg:block" aria-hidden="true">
+          <path data-tier-line d="M20 300 L20 40 L220 40 L220 140 L120 140 L120 220 L200 220 L200 300 Z" fill="none" stroke="#D4A860" stroke-width="1.5" />
+        </svg>
+        <ul class="border-t border-cream/10">
+          <li data-tier-row class="grid grid-cols-12 gap-x-4 gap-y-2 border-b border-cream/10 py-6">
+            <span class="col-span-3 font-display font-stretch-expanded text-h3 tabular-nums text-gold">$25</span>
+            <div class="col-span-9">
+              <h3 class="font-display text-h4 uppercase text-cream">Build supplies</h3>
+              <p class="mt-2 font-body text-small text-cream/70">Cables, thermal paste, shipping materials, and the small parts that keep each build moving.</p>
+            </div>
+          </li>
+          <li data-tier-row class="grid grid-cols-12 gap-x-4 gap-y-2 border-b border-cream/10 py-6">
+            <span class="col-span-3 font-display font-stretch-expanded text-h3 tabular-nums text-gold">$100</span>
+            <div class="col-span-9">
+              <h3 class="font-display text-h4 uppercase text-cream">Veteran setup</h3>
+              <p class="mt-2 font-body text-small text-cream/70">Peripherals, upgrades, and accessories that get a veteran started the day the machine arrives.</p>
+            </div>
+          </li>
+          <li data-tier-row class="grid grid-cols-12 gap-x-4 gap-y-2 border-b border-cream/10 py-6">
+            <span class="col-span-3 font-display font-stretch-expanded text-h3 tabular-nums text-gold">$500</span>
+            <div class="col-span-9">
+              <h3 class="font-display text-h4 uppercase text-cream">Major components</h3>
+              <p class="mt-2 font-body text-small text-cream/70">Core hardware &mdash; the parts that bring a custom veteran computer within reach of finished.</p>
+            </div>
+          </li>
+          <!-- The ladder's rhythm breaks exactly once, on the top tier. This is
+               the only row that carries more than a line, because it is the only
+               one that comes with something back. -->
+          <li data-tier-row class="grid grid-cols-12 gap-x-4 gap-y-2 border-b border-cream/10 py-8">
+            <span class="col-span-3 font-display font-stretch-expanded text-h3 tabular-nums text-gold">$2,000</span>
+            <div class="col-span-9">
+              <h3 class="font-display text-h4 uppercase text-cream">Sponsor a build</h3>
+              <p class="mt-2 font-body text-small text-cream/70">Fund a complete custom PC and stand behind a visible, transparent veteran impact story from start to delivery.</p>
+              <ul class="mt-4 border-t border-cream/10">
+                <li class="flex gap-3 border-b border-cream/10 py-2.5"><span class="font-body text-small tabular-nums text-gold">01</span><span class="font-body text-small text-cream/70">The AGB logo etched into the side panel of the machine you funded.</span></li>
+                <li class="flex gap-3 py-2.5"><span class="font-body text-small tabular-nums text-gold">02</span><span class="font-body text-small text-cream/70">A YouTube video of that build, start to finish.</span></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. SUPPORTERS (marquee) ============ -->
+<section id="supporters" aria-labelledby="supporters-heading" class="overflow-hidden bg-taupe py-24 md:py-28">
+  <div class="mx-auto w-full max-w-page px-6 md:px-8">
+    <p data-reveal class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-navy/30">05</span><span>Who makes this possible</span></p>
+    <h2 data-split id="supporters-heading" class="mt-4 font-display font-stretch-expanded text-h2 uppercase text-navy">Supporters</h2>
+    <p data-reveal class="mt-6 max-w-[58rem] font-body text-lead text-navy/75">
+      Every build runs on public donations plus a small group of businesses that pledge sales, product, or capacity directly to the mission.
+    </p>
+  </div>
+
+  <!-- The wall: three bands of supporter names at different depths, running
+       in opposite directions and reacting to scroll velocity. One live row for
+       real links; the rows behind it are scenery and hidden from assistive
+       tech. main.js clones each group until its track covers the viewport. -->
+  <div data-wall class="wall relative mt-16 overflow-hidden border-y border-navy/15 py-10">
+      <div class="wall-row wall-row--front" data-wall-row data-wall-dir="-1">
+        <div class="wall-track flex" data-wall-track>
+          <div class="wall-group flex items-center"><a href="https://ttrmsp.com/" target="_blank" rel="noopener noreferrer" class="wall-name mx-[3vw]">Total Tech Resources</a><a href="https://www.selfrezcoffee.com/pages/always-give-back" target="_blank" rel="noopener noreferrer" class="wall-name mx-[3vw]">Self Rez Coffee</a><a href="https://critapparel.com/collections/agb" target="_blank" rel="noopener noreferrer" class="wall-name mx-[3vw]">Crit Apparel</a><a href="https://zennipartners.pxf.io/MAW59q" target="_blank" rel="noopener noreferrer" class="wall-name mx-[3vw]">Zenni Optical</a><a href="https://www.misultin.com/" target="_blank" rel="noopener noreferrer" class="wall-name mx-[3vw]">Tiny Leviathan Studios</a></div>
+        </div>
+      </div>
+      <div class="wall-row wall-row--mid" data-wall-row data-wall-dir="1">
+        <div class="wall-track flex" data-wall-track>
+          <div class="wall-group flex items-center"><span class="wall-name mx-[3vw]" aria-hidden="true">Crit Apparel</span><span class="wall-name mx-[3vw]" aria-hidden="true">Zenni Optical</span><span class="wall-name mx-[3vw]" aria-hidden="true">Tiny Leviathan Studios</span><span class="wall-name mx-[3vw]" aria-hidden="true">Total Tech Resources</span><span class="wall-name mx-[3vw]" aria-hidden="true">Self Rez Coffee</span></div>
+        </div>
+      </div>
+      <div class="wall-row wall-row--back" data-wall-row data-wall-dir="-1">
+        <div class="wall-track flex" data-wall-track>
+          <div class="wall-group flex items-center"><span class="wall-name mx-[3vw]" aria-hidden="true">Self Rez Coffee</span><span class="wall-name mx-[3vw]" aria-hidden="true">Crit Apparel</span><span class="wall-name mx-[3vw]" aria-hidden="true">Zenni Optical</span><span class="wall-name mx-[3vw]" aria-hidden="true">Tiny Leviathan Studios</span><span class="wall-name mx-[3vw]" aria-hidden="true">Total Tech Resources</span></div>
+        </div>
+      </div>
+  </div>
+
+  <div class="mx-auto w-full max-w-page px-6 md:px-8">
+    <ul data-reveal-stagger class="mt-16 border-t border-navy/12">
+      <li data-reveal-item class="grid grid-cols-1 gap-4 border-b border-navy/12 py-7 md:grid-cols-12 md:items-center md:gap-6">
+        <h3 class="md:col-span-3 font-display text-h4 uppercase text-navy">Total Tech Resources</h3>
+        <p class="md:col-span-6 font-body text-small text-navy/70">Founder's own company. Dedicates all content-creation profits to AGB and is its exclusive builder for every veteran PC.</p>
+        <a href="https://ttrmsp.com/" target="_blank" rel="noopener noreferrer" class="btn btn--on-light inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy md:col-span-3 md:justify-self-end"><span class="btn-roll"><span>Visit site</span><span aria-hidden="true">Visit site</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </li>
+      <li data-reveal-item class="grid grid-cols-1 gap-4 border-b border-navy/12 py-7 md:grid-cols-12 md:items-center md:gap-6">
+        <h3 class="md:col-span-3 font-display text-h4 uppercase text-navy">Self Rez Coffee Company</h3>
+        <p class="md:col-span-6 font-body text-small text-navy/70">Veteran-owned coffee company. Pledges a percentage of every sale to AGB.</p>
+        <a href="https://www.selfrezcoffee.com/pages/always-give-back" target="_blank" rel="noopener noreferrer" class="btn btn--on-light inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy md:col-span-3 md:justify-self-end"><span class="btn-roll"><span>Visit site</span><span aria-hidden="true">Visit site</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </li>
+      <li data-reveal-item class="grid grid-cols-1 gap-4 border-b border-navy/12 py-7 md:grid-cols-12 md:items-center md:gap-6">
+        <h3 class="md:col-span-3 font-display text-h4 uppercase text-navy">Crit Apparel</h3>
+        <p class="md:col-span-6 font-body text-small text-navy/70">Pledges a percentage of sales to AGB and carries a dedicated AGB merch collection.</p>
+        <a href="https://critapparel.com/collections/agb" target="_blank" rel="noopener noreferrer" class="btn btn--on-light inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy md:col-span-3 md:justify-self-end"><span class="btn-roll"><span>Visit site</span><span aria-hidden="true">Visit site</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </li>
+      <li data-reveal-item class="grid grid-cols-1 gap-4 border-b border-navy/12 py-7 md:grid-cols-12 md:items-center md:gap-6">
+        <h3 class="md:col-span-3 font-display text-h4 uppercase text-navy">Zenni Optical</h3>
+        <p class="md:col-span-6 font-body text-small text-navy/70">Pledges a percentage of sales to AGB through its partner program.</p>
+        <a href="https://zennipartners.pxf.io/MAW59q" target="_blank" rel="noopener noreferrer" class="btn btn--on-light inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy md:col-span-3 md:justify-self-end"><span class="btn-roll"><span>Visit site</span><span aria-hidden="true">Visit site</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </li>
+      <li data-reveal-item class="grid grid-cols-1 gap-4 border-b border-navy/12 py-7 md:grid-cols-12 md:items-center md:gap-6">
+        <h3 class="md:col-span-3 font-display text-h4 uppercase text-navy">Tiny Leviathan Studios</h3>
+        <p class="md:col-span-6 font-body text-small text-navy/70">Creators of EXFIL. Partnered with AGB to provide the game free to veterans.</p>
+        <a href="https://www.misultin.com/" target="_blank" rel="noopener noreferrer" class="btn btn--on-light inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy md:col-span-3 md:justify-self-end"><span class="btn-roll"><span>Visit site</span><span aria-hidden="true">Visit site</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </li>
+    </ul>
+
+    <p data-reveal class="mt-10 max-w-text font-body text-small text-navy/60">
+      AGB's ambassador network, independent streamers on Kick, Twitch, and YouTube, extends the same public accountability to the gaming community that built this mission.
+      <a href="https://kick.com/agb_charity" target="_blank" rel="noopener noreferrer" class="text-navy link-wipe">Watch AGB on Kick</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 7. TRANSPARENCY ============ -->
+<section id="transparency" aria-labelledby="ledger-heading" class="relative overflow-hidden bg-cream py-20 md:py-28">
+  <div class="mx-auto w-full max-w-page px-6 md:px-8">
+    <p data-reveal class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-navy/30">06</span><span>Transparency</span></p>
+    <!-- One sentence per line, pinned rather than left to the wrap point. The
+         cap is raised past --container-text so "No guessing." cannot break. -->
+    <!-- data-split sits on each LINE, not the heading. splitWords() rebuilds an
+         element's children into word spans, so a data-split on the <h2> would
+         flatten these three blocks back into one wrapping paragraph. -->
+    <h2 id="ledger-heading" class="mt-4 max-w-[46rem] font-display font-stretch-expanded text-h2 uppercase text-navy"><span data-split class="block">No smoke.</span><span data-split class="block">No guessing.</span><span data-split class="block">Just visible impact.</span></h2>
+    <p data-reveal class="mt-6 max-w-text font-body text-lead text-navy/75">
+      Supporters deserve to know where their money goes, what it supports, and how each build reaches a real veteran. AGB was built on trust, accountability, and community-visible impact &mdash; so the books are public. Most charities show a pie chart. AGB links to <mark>the real transaction feed</mark>.
+    </p>
+
+    <div class="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="font-body text-label uppercase text-navy/50">Live total raised</p>
+        <p data-ledger-stat class="-ml-2 mt-2 font-display font-stretch-expanded text-stat tabular-nums text-navy md:-ml-6 lg:-ml-10">&mdash;</p>
+        <p class="mt-4 max-w-text font-body text-small text-navy/60">
+          This figure mirrors the live total on AGB's public ledger. It is not shown here until that feed is wired into the page &mdash; a placeholder number would defeat the point of this section.
+        </p>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7" data-reveal>
+        <p class="font-body text-label uppercase text-navy/50">What accountability means here</p>
+        <ul data-ledger class="relative mt-5 border-t border-navy/12">
+          <li data-ledger-row class="flex gap-3 border-b border-navy/12 py-4"><span aria-hidden="true" class="font-body text-gold">&#10003;</span><span class="font-body text-body text-navy/75">Donation impact is easy to understand, down to the individual line item.</span></li>
+          <li data-ledger-row class="flex gap-3 border-b border-navy/12 py-4"><span aria-hidden="true" class="font-body text-gold">&#10003;</span><span class="font-body text-body text-navy/75">Build progress stays visible to the supporters who funded it.</span></li>
+          <li data-ledger-row class="flex gap-3 border-b border-navy/12 py-4"><span aria-hidden="true" class="font-body text-gold">&#10003;</span><span class="font-body text-body text-navy/75">Veteran stories show the human result, not just the receipt.</span></li>
+          <li data-ledger-row class="flex gap-3 border-b border-navy/12 py-4"><span aria-hidden="true" class="font-body text-gold">&#10003;</span><span class="font-body text-body text-navy/75">Corporate partners see measurable impact they can point to.</span></li>
+        </ul>
+        <p class="mt-6 max-w-text font-body text-small text-navy/60">
+          Every donation and every purchase AGB makes is timestamped and public on Hack Club Bank.
+        </p>
+        <a href="https://hcb.hackclub.com/always-give-back-military-veterans-charity" target="_blank" rel="noopener noreferrer"
+           class="btn btn--on-light mt-8 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy">
+          <span class="btn-roll"><span>View the transparency report</span><span aria-hidden="true">View the transparency report</span></span><span class="sr-only"> (opens in new tab)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. STORY -- set piece: THE ODOMETER ============
+     The statement is held at full-screen scale and each line rolls up into
+     place like a split-flap, one per beat of scroll. The supporting copy only
+     arrives once the sentence has finished assembling. -->
+<section id="story" aria-labelledby="story-heading" class="relative isolate overflow-hidden bg-navy">
+  <svg data-story-parallax class="pointer-events-none absolute inset-0 -z-10 h-[130%] w-full opacity-[0.06]" viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="#D4A860" stroke-width="1"><line x1="0" y1="80" x2="800" y2="80" /><line x1="0" y1="200" x2="800" y2="200" /><line x1="0" y1="320" x2="800" y2="320" /></g>
+  </svg>
+
+  <div data-odo-pin class="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 py-24 md:px-8">
+    <div class="mx-auto w-full max-w-page">
+      <p class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-cream/30">07</span><span>Why it matters</span></p>
+
+      <h2 id="story-heading" class="odo mt-10 font-display font-stretch-expanded uppercase text-cream">
+          <span class="odo-line" data-odo-line><span class="odo-inner">One build</span></span>
+          <span class="odo-line" data-odo-line><span class="odo-inner">can change</span></span>
+          <span class="odo-line" data-odo-line><span class="odo-inner">the <mark>direction</mark></span></span>
+          <span class="odo-line" data-odo-line><span class="odo-inner">of a life.</span></span>
+      </h2>
+
+      <div data-odo-tail class="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
+        <p class="lg:col-span-5 font-body text-lead text-cream/75">
+          For some veterans, a computer is the first step back into school. For others it opens the door to work, gaming, streaming, telehealth &mdash; or simply having people to talk to again.
+        </p>
+        <p class="lg:col-span-5 lg:col-start-7 font-body text-body text-cream/70">
+          One machine, delivered free, is rarely just a machine. It is the thing that makes the next step possible.
+          <span class="mt-4 block font-body text-small uppercase tracking-widest text-cream/40">Named veteran stories run here once the veteran who gave one has signed off on every word.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. WAYS IN ============ -->
+<section id="ways-in" aria-labelledby="ways-in-heading" class="bg-cream py-24 md:py-28">
+  <div class="mx-auto w-full max-w-page px-6 md:px-8">
+    <p data-reveal class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-navy/30">08</span><span>Get involved</span></p>
+    <h2 data-split id="ways-in-heading" class="mt-4 max-w-text font-display font-stretch-expanded text-h2 uppercase text-navy">This mission needs <mark>more</mark> than donations.</h2>
+    <p data-reveal class="mt-6 max-w-text font-body text-lead text-navy/75">
+      AGB is powered by people who show up. Whether you give, volunteer, sponsor, or help us reach a veteran, you become part of the mission.
+    </p>
+
+    <div data-deal class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-10">
+      <article data-deal-card class="group relative overflow-hidden rounded-card border border-navy/12 bg-cream p-8 transition-colors duration-500 hover:border-navy/30">
+        <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
+        <h3 class="font-display text-h3 uppercase text-navy">Donate</h3>
+        <p class="mt-3 font-body text-small text-navy/70">Fund the next veteran computer build and put real technology directly into the hands of someone who served. Every dollar is tracked on the public ledger.</p>
+        <a href="https://givebutter.com/support-technology-for-veterans-and-active-duty-sbfa4r" target="_blank" rel="noopener noreferrer" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Give now</span><span aria-hidden="true">Give now</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </article>
+      <article data-deal-card class="group relative overflow-hidden rounded-card border border-navy/12 bg-cream p-8 transition-colors duration-500 hover:border-navy/30">
+        <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
+        <h3 class="font-display text-h3 uppercase text-navy">Volunteer</h3>
+        <p class="mt-3 font-body text-small text-navy/70">Support outreach, live events, logistics, veteran communication, tech support, and community operations.</p>
+        <a href="/volunteer" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Get involved</span><span aria-hidden="true">Get involved</span></span></a>
+      </article>
+      <article data-deal-card class="group relative overflow-hidden rounded-card border border-navy/12 bg-cream p-8 transition-colors duration-500 hover:border-navy/30">
+        <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
+        <h3 class="font-display text-h3 uppercase text-navy">Corporate partners</h3>
+        <p class="mt-3 font-body text-small text-navy/70">Put your company behind a mission that is visible, transparent, and built around measurable veteran impact &mdash; pledge a percentage of sales or provide in-kind product, the way AGB's current sponsors do.</p>
+        <a href="/partners" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Partner with us</span><span aria-hidden="true">Partner with us</span></span></a>
+      </article>
+      <article data-deal-card class="group relative overflow-hidden rounded-card border border-navy/12 bg-cream p-8 transition-colors duration-500 hover:border-navy/30">
+        <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
+        <h3 class="font-display text-h3 uppercase text-navy">Refer a veteran</h3>
+        <p class="mt-3 font-body text-small text-navy/70">Know a veteran who could use technology, connection, and support? Help us reach them.</p>
+        <a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Refer someone</span><span aria-hidden="true">Refer someone</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </article>
+      <article id="request-a-pc" data-deal-card class="group relative overflow-hidden rounded-card border border-navy/12 bg-cream p-8 transition-colors duration-500 hover:border-navy/30">
+        <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
+        <h3 class="font-display text-h3 uppercase text-navy">Request a PC</h3>
+        <p class="mt-3 font-body text-small text-navy/70">Veterans can apply directly for a free, custom-built machine.</p>
+        <a href="/apply" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>See the application</span><span aria-hidden="true">See the application</span></span></a>
+      </article>
+      <article data-deal-card class="group relative overflow-hidden rounded-card border border-navy/12 bg-cream p-8 transition-colors duration-500 hover:border-navy/30">
+        <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
+        <h3 class="font-display text-h3 uppercase text-navy">Stream for AGB</h3>
+        <p class="mt-3 font-body text-small text-navy/70">Join the ambassador network raising for veteran builds on Kick, Twitch, and YouTube.</p>
+        <a href="https://kick.com/agb_charity" target="_blank" rel="noopener noreferrer" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Watch AGB on Kick</span><span aria-hidden="true">Watch AGB on Kick</span></span><span class="sr-only"> (opens in new tab)</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10. DONATE BAND (the close) ============ -->
+<section id="donate" data-curtain aria-labelledby="donate-heading" class="relative overflow-hidden bg-red py-16 md:py-24">
+  <div class="pointer-events-none absolute inset-0 bg-radial from-cream/10 via-transparent to-transparent" aria-hidden="true"></div>
+  <div class="relative mx-auto w-full max-w-page px-6 text-center md:px-8">
+    <p data-reveal class="flex items-center justify-center gap-3 font-body text-eyebrow uppercase text-cream/70"><span class="tabular-nums text-cream/40">09</span><span>The ask</span></p>
+    <h2 data-split id="donate-heading" class="mt-4 font-display font-stretch-expanded text-h2 uppercase text-cream">Help us put the next opportunity in a veteran's hands.</h2>
+    <p data-reveal class="mx-auto mt-4 max-w-text font-body text-lead text-cream/85">Every PC, training session, support call, community program, and expansion starts with someone deciding to fund it. Make a one time donation, become a monthly donor, sponsor a veteran build, fund a program, or talk with us about a corporate or grant partnership.</p>
+    <div data-reveal class="mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a href="https://givebutter.com/support-technology-for-veterans-and-active-duty-sbfa4r" target="_blank" rel="noopener noreferrer"
+         class="btn inline-flex items-center justify-center gap-2 rounded-card bg-gold px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-gold/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
+        <span class="btn-roll"><span>Donate now</span><span aria-hidden="true">Donate now</span></span><span class="sr-only"> (opens in new tab)</span>
+      </a>
+      <a href="/programs" class="btn inline-flex items-center justify-center gap-2 rounded-card border border-cream/40 px-8 py-4 font-body text-label uppercase text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">
+        <span class="btn-roll"><span>Sponsor a program</span><span aria-hidden="true">Sponsor a program</span></span>
+      </a>
+      <a href="/partners" class="btn inline-flex items-center justify-center gap-2 rounded-card border border-cream/40 px-8 py-4 font-body text-label uppercase text-cream transition-colors hover:bg-cream/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream">
+        <span class="btn-roll"><span>Partner with AGB</span><span aria-hidden="true">Partner with AGB</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navy pb-12 pt-20">
+  <div class="mx-auto w-full max-w-page px-6 md:px-8">
+    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="images/logo.webp" alt="Always Give Back logo" class="size-12 rounded-full" loading="lazy" />
+          <span class="font-display font-stretch-expanded text-h4 text-gold">AGB</span>
+        </div>
+        <p class="mt-4 max-w-text font-body text-small text-cream/70">A military veterans charity founded in November 2019, focused on technology, community, transparency, and direct veteran support. Canton, OH.</p>
+        <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+          <a href="https://x.com/AgbCharity" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">X</a>
+          <a href="https://www.instagram.com/agbcharity/" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Instagram</a>
+          <a href="https://www.tiktok.com/@agbcharity" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">TikTok</a>
+          <a href="https://www.youtube.com/channel/UCdOSYjfe9JgA_jrDhcg9EjQ" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">YouTube</a>
+          <a href="https://kick.com/agb_charity" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Kick</a>
+          <a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Discord</a>
+          <a href="https://www.linkedin.com/company/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">LinkedIn</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-display text-h4 uppercase text-cream">Mission</h4>
+        <ul class="mt-5 space-y-3">
+          <li><a href="#the-turn" class="font-body text-small text-cream/70 hover:text-gold">Why we exist</a></li>
+          <li><a href="/programs" class="font-body text-small text-cream/70 hover:text-gold">Programs &amp; funding priorities</a></li>
+          <li><a href="#what-we-do" class="font-body text-small text-cream/70 hover:text-gold">What we do</a></li>
+          <li><a href="#story" class="font-body text-small text-cream/70 hover:text-gold">Veteran stories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display text-h4 uppercase text-cream">Support</h4>
+        <ul class="mt-5 space-y-3">
+          <li><a href="#donate" class="font-body text-small text-cream/70 hover:text-gold">Donate</a></li>
+          <li><a href="#support" class="font-body text-small text-cream/70 hover:text-gold">Sponsor a build</a></li>
+          <li><a href="/volunteer" class="font-body text-small text-cream/70 hover:text-gold">Volunteer</a></li>
+          <li><a href="/partners" class="font-body text-small text-cream/70 hover:text-gold">Corporate partners</a></li>
+          <li><a href="/partner-inquiry" class="font-body text-small text-cream/70 hover:text-gold">Partnership inquiry</a></li>
+          <li><a href="/apply" class="font-body text-small text-cream/70 hover:text-gold">Request a PC</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display text-h4 uppercase text-cream">Trust</h4>
+        <ul class="mt-5 space-y-3">
+          <li><a href="/impact" class="font-body text-small text-cream/70 hover:text-gold">Impact &amp; transparency</a></li>
+          <li><a href="https://hcb.hackclub.com/always-give-back-military-veterans-charity" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Public financial transactions</a></li>
+          <li><span class="font-body text-small text-cream/70">EIN 42-1953879</span></li>
+          <li><a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Contact, via Discord</a></li>
+        </ul>
+        <p class="mt-6 max-w-text font-body text-small text-cream/50">Built for AAA contrast and full keyboard operability. Found something that doesn't work? Tell us on Discord.</p>
+      </div>
+    </div>
+    <div class="mt-16 border-t border-cream/10 pt-8">
+      <p class="font-body text-small text-cream/50">&copy; 2026 Always Give Back. EIN 42-1953879. Veteran Non-Profit.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

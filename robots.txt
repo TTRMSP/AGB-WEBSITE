@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alwaysgiveback.org/sitemap.xml

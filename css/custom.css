@@ -1,0 +1,687 @@
+/* Hand-authored motion + polish layer. Tailwind (CDN, @theme) handles layout/color/type utilities in index.html; this file is everything Tailwind utilities can't express: keyframes, masked text reveals, the marquee, grain, scrollbar. */
+
+::selection {
+  background: #D4A860;
+  color: #021425;
+}
+
+/* ---------- impact highlight ----------
+   Deliberately the same gold-on-navy pair as ::selection above, so a
+   highlighted phrase reads as if the visitor had dragged over it themselves.
+   Keep the two rules in sync -- the effect only works while they match.
+   Gold + navy carries AAA-ish contrast on every ground the site uses (navy,
+   cream, taupe, army, red), so this is safe in any section.
+   box-decoration-break: clone so a phrase wrapping onto a second line gets
+   its own padded box instead of one ragged bar. */
+mark {
+  background-color: #D4A860;
+  color: #021425;
+  padding: 0 0.14em;
+  border-radius: 1px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+html {
+  background: #021425;
+  scroll-padding-top: 6.5rem;
+}
+
+[id] {
+  scroll-margin-top: 6.5rem;
+}
+
+/* ---------- word-mask reveal ---------- */
+.reveal-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+  /* Each word becomes its own inline-block, so a word wider than the column
+     can no longer wrap -- it just runs past the mask's overflow:hidden and is
+     silently cut off (the display scale bottoms out at 52px, so "COMPUTERS."
+     alone is 456px on a 327px mobile column). `anywhere` is the one
+     overflow-wrap value that also shrinks the inline-block's min-content
+     width, so the box actually narrows; `break-word` does not. hyphens picks
+     the nicer break point when the dictionary offers one. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.reveal-word > span {
+  display: inline-block;
+  transform: translateY(115%);
+  will-change: transform;
+}
+
+/* ---------- Hero: one screen on every desktop height ----------
+   Everything the landing is supposed to say -- eyebrow, headline, lede, both
+   CTAs, the trust strip -- has to be readable without scrolling. Width alone
+   can't deliver that: --text-h1 is a vw clamp, so on a short-but-wide laptop
+   (1440x800, 1366x768) the headline gets sized for the width, runs to five
+   lines, and pushes the donate button past the fold. Every vertical value
+   below is therefore bounded by vh as well as vw, via min(). Values are
+   deliberately expressed here rather than as Tailwind arbitrary utilities so
+   the whole vertical budget for this section reads in one place. */
+.hero-section {
+  padding-top: clamp(4.5rem, 10.5vh, 7.5rem);
+  padding-bottom: clamp(2.75rem, 7vh, 5rem);
+}
+/* Size/weight/tracking all live on the --text-h1 token so the headline keeps
+   its display look; only the spacing above it is set here. */
+.hero-h1 {
+  margin-top: clamp(0.85rem, 2vh, 1.5rem);
+}
+.hero-lede {
+  margin-top: clamp(0.75rem, 2.2vh, 2rem);
+}
+.hero-cta {
+  margin-top: clamp(1rem, 2.8vh, 2.5rem);
+}
+.hero-trust {
+  margin-top: clamp(1rem, 2.8vh, 3rem);
+  padding-top: clamp(0.7rem, 1.6vh, 1.5rem);
+}
+
+/* Under ~640px tall the scroll cue is competing with the content it sits
+   under; the trust strip is the more useful thing to keep. */
+@media (max-height: 640px) {
+  [data-hero-cue] { display: none; }
+}
+
+/* ---------- grain overlay ---------- */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- marquee ---------- */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+/* Each group is one full pass of the supporter list. main.js clones these so
+   that half the track always covers the row -- with only five names, a single
+   pass is ~1500px and a 1440p/4K row would scroll into empty space. */
+.marquee-group {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ---------- preloader ---------- */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: #021425;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #021425;
+}
+::-webkit-scrollbar-thumb {
+  background: #4A513A;
+  border: 2px solid #021425;
+}
+* {
+  scrollbar-color: #4A513A #021425;
+  scrollbar-width: thin;
+}
+
+/* ---------- misc ---------- */
+.glow-gold {
+  box-shadow: 0 0 60px 0 rgba(212, 168, 96, 0.25);
+}
+
+/* ---------- CTA system ----------
+   Two moves, both drawn from the documentary/record register rather than from
+   generic web hover vocabulary:
+   1. Registration marks. Two diagonal hairline corners draw inward on hover,
+      the way crop marks frame a plate or a callout frames a spec drawing.
+   2. Label roll. The label is masked and swaps for an identical copy sliding
+      up from below -- mechanical, like a split-flap or an odometer.
+   No fills sliding across, no shadows, no scaling. */
+
+.btn {
+  position: relative;
+  --btn-mark: #D4A860; /* gold marks: correct on navy, army, and red grounds */
+}
+.btn--on-light {
+  --btn-mark: #021425; /* navy marks: for buttons sitting on cream or taupe */
+}
+
+.btn::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-color: var(--btn-mark);
+  border-style: solid;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn::before {
+  top: -7px;
+  left: -7px;
+  border-width: 1px 0 0 1px;
+  transform: translate(7px, 7px);
+}
+.btn::after {
+  right: -7px;
+  bottom: -7px;
+  border-width: 0 1px 1px 0;
+  transform: translate(-7px, -7px);
+}
+.btn:hover::before,
+.btn:focus-visible::before,
+.btn:hover::after,
+.btn:focus-visible::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.btn-roll {
+  display: inline-grid;
+  overflow: hidden;
+  line-height: 1;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.btn-roll > span {
+  grid-area: 1 / 1;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-roll > span:last-child {
+  transform: translateY(115%);
+}
+.btn:hover .btn-roll > span:first-child,
+.btn:focus-visible .btn-roll > span:first-child {
+  transform: translateY(-115%);
+}
+.btn:hover .btn-roll > span:last-child,
+.btn:focus-visible .btn-roll > span:last-child {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn::before,
+  .btn::after { transition: opacity 0.01ms; transform: none; }
+  .btn-roll > span { transition: none; }
+  .btn-roll > span:last-child { display: none; }
+}
+
+/* ---------- text links: the gold rule sweeps through, exiting right while an
+   identical rule enters from the left. Two gradient layers, one anchored to
+   each edge, animated only in width. ---------- */
+.link-wipe {
+  text-decoration: none;
+  background-image: linear-gradient(#D4A860, #D4A860), linear-gradient(#D4A860, #D4A860);
+  background-repeat: no-repeat;
+  background-size: 100% 2px, 0 2px;
+  background-position: 100% 100%, 0 100%;
+  padding-bottom: 0.5em;
+  transition: background-size 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-wipe:hover,
+.link-wipe:focus-visible {
+  background-size: 0 2px, 100% 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-wipe { transition: none; }
+}
+
+/* ---------- The Turn: scrub-lit narrative ----------
+   Words start dim and light to full cream as scroll progress advances, so the
+   sentence is read at the page's pace. The unlit value is deliberately not
+   near-zero: if the scrub never runs, the line must still be legible rather
+   than an invisible block of text. The clause after the em dash lands in gold. */
+.turn-word {
+  display: inline-block;
+  color: rgba(237, 229, 218, 0.2);
+  background-color: transparent;
+  padding: 0 0.14em;
+  margin: 0 -0.14em; /* cancel the padding so unlit word spacing is unchanged */
+  border-radius: 1px;
+  transition: color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.turn-word.is-lit {
+  color: #EDE5DA;
+}
+/* The marked phrase doesn't just brighten -- it gets picked out with the
+   selection highlight as it lands, which is the sentence's payoff beat. */
+.turn-word--mark.is-lit {
+  background-color: #D4A860;
+  color: #021425;
+}
+
+[data-turn-tail] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-turn-tail].is-lit {
+  opacity: 1;
+  transform: none;
+}
+
+/* Keep the closed and open states on the SAME property, and own both here
+   rather than starting from Tailwind's scale-x-0: that utility sets the
+   standalone `scale` property, which is independent of `transform`, so a
+   transform-based open state never overrides it and the rule stays 0px wide. */
+[data-turn-horizon] {
+  transform: scaleX(0);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-turn-horizon].is-lit {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turn-word,
+  [data-turn-tail],
+  [data-turn-horizon] { transition: none; }
+}
+
+/* ================= ANTI-FLASH ARMING =================
+   Every "before" state that JS used to set at runtime lives here instead,
+   gated on .js-anim (added by the inline head script before first paint).
+   main.js runs at the end of <body>, so anything armed there is armed one
+   painted frame too late: the section shows finished, then snaps back to the
+   start when its tween is created.
+
+   Rule for anything added here: the matching JS tween must be fromTo(), never
+   from(). A from() tween reads the CURRENT value as its destination, so with
+   the element already at opacity 0 it would animate 0 -> 0 and stay invisible
+   forever. Every element below is paired with a fromTo and a watchdog. */
+/* Animated at every breakpoint -- safe to arm unconditionally. */
+.js-anim [data-hero-fade],
+.js-anim [data-hero-cue],
+.js-anim [data-deal-card],
+.js-anim [data-reveal],
+.js-anim [data-reveal-item] {
+  opacity: 0;
+}
+
+/* Armed ONLY where the animation that undoes them actually runs.
+   Scope must match the media query in main.js exactly -- an armed element
+   whose animation never runs at that breakpoint is permanently invisible.
+
+   The tiers and the odometer now animate at EVERY breakpoint: lg and up via
+   their pinned scrub, below lg via a non-pinned per-element trigger (see the
+   narrow branches in main.js). So they are armed unconditionally, and each
+   has a watchdog that forces the resting state if its trigger never fires. */
+.js-anim [data-tier-row],
+.js-anim [data-odo-tail] {
+  opacity: 0;
+}
+.js-anim [data-odo-line] .odo-inner {
+  transform: translateY(108%);
+}
+
+/* These two stay lg-only. They belong to The Count's collapse -- the numeral
+   travelling out of the way while the mission copy rises into the space it
+   vacates -- which only exists inside the pinned branch. The mobile branch
+   counts the figure but never moves it, so nothing there would un-hide these. */
+@media (min-width: 1024px) {
+  .js-anim [data-count-caption],
+  .js-anim [data-mission-lead] {
+    opacity: 0;
+  }
+}
+
+/* ================= SET PIECES =================
+   These are the large moves -- viewport-scale type, horizontal travel, depth.
+   Resting states are all readable: the JS arms the "before" state only when
+   it can also animate it, so a blocked CDN leaves plain, legible sections. */
+
+/* --- 02 THE COUNT: a numeral sized to own the screen --- */
+.count-giant {
+  font-size: clamp(160px, 34vw, 520px);
+  letter-spacing: -0.05em;
+}
+
+/* The numeral is absolutely placed so it can travel across the pinned
+   viewport without shifting the copy. Below lg there is no pin and no travel,
+   so it has to come back into flow -- left absolute it simply lies on top of
+   the heading and the section is unreadable on a phone. */
+@media (max-width: 1023.98px) {
+  [data-count-pin] {
+    display: block;
+    min-height: 0;
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+  }
+  [data-count-layer] {
+    position: static;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  [data-count-layer] .count-giant {
+    font-size: clamp(120px, 30vw, 220px);
+  }
+}
+
+/* --- 03 THE WINDOW: programme titles as stencil plates ---
+   Two copies of the title share one grid cell, exactly the .btn-roll idiom.
+
+   .win-plate is the REAL heading -- outlined letterforms, legible on its own
+   with no JS, no GSAP and no background-clip support. .win-fill is an
+   aria-hidden duplicate whose letterforms are a window onto a scene that does
+   not travel with the type, so scrolling reveals a moving ground through the
+   words rather than sliding a box across the screen.
+
+   The fill is pure enhancement. If everything below fails, the section is
+   still a plain outlined headline on a dark ground. */
+.win-panel {
+  position: sticky;
+  top: 0;
+}
+
+/* The ceiling is set by the longest word in the section, not by taste.
+   "GIVEAWAYS" measures 6.79x its font size at this weight and width axis, and
+   the panel's content box is 1184px at the 78rem container -- so anything past
+   ~174px forces a mid-word break. 170px leaves a margin for font fallback.
+   The 44px floor is the same calculation at 375px: 327px of content box, so
+   6.79 x 44 = 299px still fits on one line.
+
+   If the display face or the copy changes, re-measure. A title that breaks
+   mid-word is the failure this clamp exists to prevent. */
+.win-title {
+  display: grid;
+  font-size: clamp(44px, 11.5vw, 170px);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+}
+.win-title > span {
+  grid-area: 1 / 1;
+  /* break-word, not anywhere: both only break when a word cannot fit, but
+     `anywhere` also shrinks min-content width, which let a too-narrow cap pull
+     the box in and split GIVEAWAYS across two lines. This is the safety net
+     for viewports narrower than the clamp floor assumes, nothing more. */
+  overflow-wrap: break-word;
+}
+
+.win-plate {
+  color: rgba(237, 229, 218, 0.12);
+  -webkit-text-stroke: 1px rgba(237, 229, 218, 0.42);
+}
+
+.win-fill {
+  background-image:
+    radial-gradient(58% 76% at 24% 24%, #D4A860 0%, rgba(212, 168, 96, 0) 62%),
+    radial-gradient(50% 70% at 76% 80%, #892F2A 0%, rgba(137, 47, 42, 0) 60%),
+    radial-gradient(88% 118% at 52% 48%, #DAD1C3 0%, rgba(218, 209, 195, 0) 68%),
+    linear-gradient(158deg, #4A513A 0%, #586363 44%, #112738 100%);
+  background-size: 240% 240%;
+  background-repeat: no-repeat;
+  background-position: 50% 8%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  will-change: clip-path, background-position;
+}
+.win-panel--alt .win-fill {
+  background-image:
+    radial-gradient(56% 74% at 74% 26%, #D4A860 0%, rgba(212, 168, 96, 0) 60%),
+    radial-gradient(52% 68% at 22% 78%, #4A513A 0%, rgba(74, 81, 58, 0) 62%),
+    radial-gradient(86% 116% at 48% 52%, #EDE5DA 0%, rgba(237, 229, 218, 0) 66%),
+    linear-gradient(200deg, #892F2A 0%, #2F3B41 46%, #021425 100%);
+}
+
+/* The wipe is the reveal. Armed here so the fill never paints finished and
+   snaps back; the JS scrubs it open and watchdogs it. */
+.js-anim .win-fill {
+  clip-path: inset(0 100% 0 0);
+}
+.js-anim [data-win-kicker],
+.js-anim [data-win-body] {
+  opacity: 0;
+}
+
+/* The scene behind the plate. Authored as one element so a real photograph
+   can replace these gradients later without touching the mask. */
+.win-scene {
+  background-image:
+    radial-gradient(42% 56% at 78% 20%, rgba(212, 168, 96, 0.16), transparent 70%),
+    radial-gradient(46% 60% at 10% 84%, rgba(74, 81, 58, 0.34), transparent 72%);
+  will-change: transform;
+}
+.win-scene::after {
+  content: "";
+  position: absolute;
+  inset: -25% 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(237, 229, 218, 0.06) 0 1px,
+    transparent 1px 132px
+  );
+}
+
+/* No background-clip support: drop the window entirely and let the real
+   heading carry full weight. Never leave transparent text on screen. */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .win-fill { display: none; }
+  .win-plate {
+    color: #EDE5DA;
+    -webkit-text-stroke: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .win-fill { clip-path: none !important; }
+  .win-panel { position: relative; }
+  .win-scene { transform: none !important; }
+}
+
+/* --- 05 THE WALL: three depths of supporter names --- */
+.wall-row {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+}
+.wall-row + .wall-row { margin-top: 0.4vw; }
+.wall-name {
+  font-family: "Archivo", "Public Sans", ui-sans-serif, sans-serif;
+  font-stretch: 125%;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+/* Depth: the front band is solid and large, the ones behind are smaller,
+   paler and slightly blurred, so the group reads as a crowd with distance
+   rather than three equal ticker tapes. */
+.wall-row--front .wall-name { font-size: clamp(38px, 7vw, 104px); color: #021425; }
+.wall-row--front .wall-name:hover { color: #892F2A; }
+.wall-row--mid   .wall-name { font-size: clamp(26px, 4.6vw, 70px);  color: rgba(2, 20, 37, 0.38); filter: blur(0.4px); }
+.wall-row--back  .wall-name { font-size: clamp(18px, 3.2vw, 48px);  color: rgba(2, 20, 37, 0.2);  filter: blur(1px); }
+
+/* --- 08 THE ODOMETER: lines roll up into place --- */
+/* Bounded by viewport HEIGHT as well as width, same min(vw, vh) technique as
+   --text-h1. Four lines at 0.94 leading have to clear the eyebrow above them
+   and the two-column tail below, all inside a pinned, overflow-hidden
+   viewport -- so a vw-only clamp sized the type for WIDTH on a wide-but-short
+   display (1280x720, 1440x800) and the last line got clipped with no way to
+   scroll to it. Height is the binding constraint here, not width. */
+.odo {
+  font-size: clamp(28px, min(9.5vw, 10vh), 150px);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+}
+
+/* Short viewports: the fixed vertical rhythm (py-24 + mt-10 + mt-12 = ~240px)
+   is a small share of a 1080px screen and a huge one of a 700px screen, so
+   claw it back rather than shrinking the type further. Specificity beats the
+   Tailwind utilities these override. */
+@media (max-height: 860px) {
+  [data-odo-pin] {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  [data-odo-pin] .odo {
+    margin-top: 1.5rem;
+  }
+  [data-odo-pin] [data-odo-tail] {
+    margin-top: 1.75rem;
+  }
+}
+.odo-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.odo-inner {
+  display: block;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .odo-inner { transform: none !important; }
+  .wall-row  { animation: none; }
+}
+
+/* ---------- per-section cinematic devices ----------
+   Each section gets ONE device rather than a shared reveal, so the scroll
+   reads as a sequence of different camera moves instead of the same fade
+   nine times. Every rule here has a resting state that is fully legible:
+   GSAP sets the "before" state at runtime only when it can also animate it,
+   so a stalled ticker or a blocked CDN can never leave content hidden. */
+
+/* 06 transparency: rows feed out of the ledger like a receipt printing */
+[data-ledger-row] {
+  transition: clip-path 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-ledger-row].is-armed {
+  clip-path: inset(0 100% 0 0);
+}
+
+/* 08 ways in: cards deal in on a shared perspective */
+[data-deal] {
+  perspective: 1400px;
+  perspective-origin: 50% 0%;
+}
+[data-deal-card] {
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
+/* Motion off: every device rests in its finished state. */
+@media (prefers-reduced-motion: reduce) {
+  [data-ledger-row].is-armed { clip-path: none; transition: none; }
+}
+
+/* ---------- chapter rail ---------- */
+[data-chapter-fill] {
+  transition: height 0.1s linear;
+}
+[data-chapter-dot].is-active {
+  background-color: #D4A860;
+  transform: scale(1.5);
+}
+
+/* Rail dots name themselves on hover/focus, so the rail reads as a table of
+   contents rather than decoration. Pointer-events off: the label must never
+   swallow a click meant for the dot. */
+.chapter-label {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  translate: 0 -50%;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-chapter-link]:hover .chapter-label,
+[data-chapter-link]:focus-visible .chapter-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-label { transition: none; }
+}
+
+/* ---------- scroll progress bar ---------- */
+[data-scroll-progress] {
+  transition: width 0.1s linear;
+}
+
+/* ================= Modal ("toast") dialogs =================
+   Native <dialog> gives free focus trapping, Escape-to-close, and top-layer
+   stacking, which is what lets the benefits-letter example open on top of
+   the application form without any z-index bookkeeping. */
+/* The dialog itself is the ONLY scroll container -- its inner content div is
+   just padding/border, never its own overflow region. Two nested scrollable
+   boxes (dialog + inner div both overflow-y:auto) is what produced the
+   double-scrollbar bug; giving exactly one element the scroll responsibility
+   fixes it structurally rather than by tweaking heights. */
+dialog[data-modal] {
+  margin: auto;
+  padding: 0;
+  border: none;
+  width: 92vw;
+  max-width: 1100px;
+  height: 90vh;
+  max-height: 1200px;
+  overflow-y: auto;
+  background: transparent;
+  overscroll-behavior: contain;
+}
+/* Belt-and-suspenders: modern browsers honor this, but the JS scroll-lock in
+   main.js (which fixes <body> in place) is the mechanism that actually works
+   everywhere -- see the Modal dialogs section there for why :has() alone
+   wasn't enough (Lenis drives scroll independently of native overflow). */
+html:has(dialog[data-modal][open]) {
+  overflow: hidden;
+}
+dialog[data-modal][data-modal-narrow] {
+  width: 80vw;
+  max-width: 720px;
+  height: auto;
+  max-height: 90vh;
+}
+dialog[data-modal]::backdrop {
+  background: rgba(2, 20, 37, 0.82);
+  backdrop-filter: blur(4px);
+}
+dialog[data-modal][open] {
+  animation: modal-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  dialog[data-modal][open] { animation: none; }
+}
