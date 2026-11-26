@@ -139,7 +139,7 @@
 </head>
 <body class="overflow-x-hidden bg-navy font-body text-body text-navy antialiased">
 
-<div id="preloader" aria-hidden="true">
+<div id="preloader" aria-hidden="true" hidden>
   <span class="font-display font-stretch-expanded text-h3 text-gold">AGB</span>
 </div>
 
@@ -217,7 +217,7 @@
     </a>
   </div>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
 <!-- ============ INTRO + METRICS ============ -->
 <section id="intro" aria-labelledby="hero-heading" class="relative isolate flex items-center overflow-hidden bg-linear-to-b from-navy-light to-navy pb-20 pt-36 md:pb-24 md:pt-44">
@@ -266,10 +266,10 @@
 
     <div class="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <p class="font-body text-label uppercase text-navy/50">Live total raised</p>
-        <p data-ledger-stat class="-ml-2 mt-2 font-display font-stretch-expanded text-[clamp(40px,6vw,88px)] leading-[0.88] tracking-[-0.04em] font-extrabold tabular-nums text-navy md:-ml-6 lg:-ml-10">$2,000</p>
+        <p class="font-body text-label uppercase text-navy/50">Public financial ledger</p>
+        <p data-ledger-stat class="-ml-2 mt-2 font-display font-stretch-expanded text-[clamp(40px,6vw,88px)] leading-[0.88] tracking-[-0.04em] font-extrabold tabular-nums text-navy md:-ml-6 lg:-ml-10"><a href="https://hcb.hackclub.com/always-give-back-military-veterans-charity" class="link-wipe" target="_blank" rel="noopener noreferrer">View ledger</a></p>
         <p class="mt-4 max-w-text font-body text-small text-navy/60">
-          This figure mirrors the live total on AGB's public ledger.
+          See the public ledger for recorded transactions and current reporting.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7" data-reveal>
@@ -279,10 +279,7 @@
           <li class="flex gap-3 border-b border-navy/12 py-4"><span aria-hidden="true" class="font-body text-gold">&#10003;</span><span class="font-body text-body text-navy/75">Build progress stays visible to the supporters who funded it.</span></li>
           <li class="flex gap-3 border-b border-navy/12 py-4"><span aria-hidden="true" class="font-body text-gold">&#10003;</span><span class="font-body text-body text-navy/75">Corporate partners and grantmakers see measurable impact they can point to.</span></li>
         </ul>
-        <button type="button" disabled aria-disabled="true"
-           class="mt-8 inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-card border border-navy/20 bg-transparent px-8 py-4 font-body text-label uppercase text-navy/40">
-          Pending
-        </button>
+        <a href="https://hcb.hackclub.com/always-give-back-military-veterans-charity" target="_blank" rel="noopener noreferrer" class="mt-8 inline-flex rounded-card border border-navy/30 px-8 py-4 font-body text-label uppercase text-navy">View public ledger</a>
       </div>
     </div>
   </div>
@@ -298,9 +295,9 @@
     </p>
 
     <ul data-reveal-stagger class="mt-12 border-t border-cream/12">
-      <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">Certificate of incorporation (Ohio)</span><span class="font-body text-small text-gold">See <a href="PDFs/OH%20Certificate.pdf" target="_blank" rel="noopener noreferrer" class="link-wipe text-gold">document</a></span></li>
-      <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">EIN assignment letter (IRS)</span><span class="font-body text-small text-gold">See <a href="PDFs/AGB%20Assignment%20of%20EIN.pdf" target="_blank" rel="noopener noreferrer" class="link-wipe text-gold">document</a></span></li>
-      <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">W-9</span><span class="font-body text-small text-gold">See <a href="PDFs/AGB%20W9.pdf" target="_blank" rel="noopener noreferrer" class="link-wipe text-gold">document</a></span></li>
+      <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">Certificate of incorporation (Ohio)</span><span class="font-body text-small text-gold">See <a href="PDFs/OH%20Certificate.pdf" target="_blank" rel="noopener noreferrer" class="link-wipe text-gold">Certificate of incorporation (PDF)</a></span></li>
+      <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">EIN assignment letter (IRS)</span><span class="font-body text-small text-gold">See <a href="PDFs/AGB%20Assignment%20of%20EIN.pdf" target="_blank" rel="noopener noreferrer" class="link-wipe text-gold">EIN assignment letter (PDF)</a></span></li>
+      <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">W-9</span><span class="font-body text-small text-gold">See <a href="PDFs/AGB%20W9.pdf" target="_blank" rel="noopener noreferrer" class="link-wipe text-gold">W-9 (PDF)</a></span></li>
       <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">Bylaws</span><span class="font-body text-small uppercase tracking-widest text-cream/40">Pending</span></li>
       <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">Organizational leadership</span><span class="font-body text-small uppercase tracking-widest text-cream/40">Pending</span></li>
       <li data-reveal-item class="flex items-center justify-between gap-4 border-b border-cream/12 py-4"><span class="font-body text-body text-cream/80">Current program descriptions</span><span class="font-body text-small text-gold">See <a href="/programs" class="link-wipe text-gold">programs</a></span></li>
@@ -369,7 +366,7 @@
           <li><span class="font-body text-small text-cream/70">EIN 42-1953879</span></li>
           <li><a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Contact, via Discord</a></li>
         </ul>
-        <p class="mt-6 max-w-text font-body text-small text-cream/50">Built for AAA contrast and full keyboard operability. Found something that doesn't work? Tell us on Discord.</p>
+        <p class="mt-6 max-w-text font-body text-small text-cream/50">Accessibility matters to us. Found something that doesn't work? Tell us on Discord.</p>
       </div>
     </div>
     <div class="mt-16 border-t border-cream/10 pt-8">
