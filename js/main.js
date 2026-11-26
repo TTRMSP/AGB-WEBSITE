@@ -3,7 +3,7 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var isCoarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-  var canAnimate = !reduceMotion && typeof gsap !== "undefined";
+  var canAnimate = !reduceMotion && typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
 
   if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -68,6 +68,7 @@
     runHeroIntro();
   }
   if (preloader) {
+    preloader.hidden = false;
     if (canAnimate) {
       gsap.to(preloader, { autoAlpha: 0, duration: 0.6, ease: "power2.out", onComplete: hidePreloader });
     }
@@ -106,6 +107,7 @@
       if (!id || id === "#") return;
       var target = document.querySelector(id);
       if (!target) return;
+      if (id === "#main") { target.focus({ preventScroll: true }); }
       e.preventDefault();
       if (lenis) {
         lenis.scrollTo(target, { offset: -104 });
@@ -1079,7 +1081,7 @@
           groupW: groupW,
           dir: parseFloat(row.getAttribute("data-wall-dir")) || -1,
           offset: 0,
-          setX: gsap.quickSetter ? gsap.quickSetter(track, "x", "px") : null,
+          setX: typeof gsap !== "undefined" && gsap.quickSetter ? gsap.quickSetter(track, "x", "px") : null,
         };
       });
     }
