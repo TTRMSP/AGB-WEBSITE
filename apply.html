@@ -148,7 +148,7 @@
 </head>
 <body class="overflow-x-hidden bg-navy font-body text-body text-navy antialiased">
 
-<div id="preloader" aria-hidden="true">
+<div id="preloader" aria-hidden="true" hidden>
   <span class="font-display font-stretch-expanded text-h3 text-gold">AGB</span>
 </div>
 
@@ -215,7 +215,7 @@
   </a>
 </div>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
 <!-- ============ LANDING ============ -->
 <section id="intro" aria-labelledby="hero-heading" class="relative isolate flex items-center overflow-hidden bg-linear-to-b from-navy-light to-navy">
@@ -247,7 +247,7 @@
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
         <p data-reveal class="flex items-center gap-3 font-body text-eyebrow uppercase text-gold"><span class="tabular-nums text-navy/30">01</span><span>The application</span></p>
-        <h2 id="form-heading" data-split class="mt-4 font-display font-stretch-expanded text-h2 uppercase text-navy">Tell us your situation</h2>
+        <h2 id="form-heading" data-split class="mt-4 font-display font-stretch-expanded text-h2 uppercase text-navy">Tell us your situation.</h2>
         <p data-reveal class="mt-4 max-w-text font-body text-body text-navy/75">Make sure you join the <a href="https://discord.com/invite/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="font-bold underline text-navy hover:text-red">Discord</a> for updates.</p>
         <p data-reveal class="mt-6 max-w-text font-body text-body text-navy/75">
           There are no wrong answers here. The more we understand about where you are and what a machine would let you do, the better we can match a build to it.
@@ -406,7 +406,7 @@
                 <button type="button" data-modal-target="benefits-letter-example" aria-label="See an example of the benefits declaration letter"
                   class="inline-flex size-5 shrink-0 items-center justify-center rounded-full border border-navy/40 font-body text-[11px] font-bold leading-none text-navy/70 transition-colors hover:border-navy hover:text-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">?</button>
               </div>
-              <p class="mt-1 font-body text-small text-navy/50">A copy of your VA benefits letter showing your disability rating. Black out your SSN, VA file/claim number, and any other sensitive identifiers before uploading &mdash; tap the <span class="whitespace-nowrap">&ldquo;?&rdquo;</span> above for an example. Accepts PDF, Word documents, and photos &mdash; you can attach more than one file.</p>
+              <p class="mt-1 font-body text-small text-navy/50">A copy of your VA benefits letter showing your disability rating. Black out your SSN, VA file/claim number, and any other sensitive identifiers before uploading &mdash; tap the <span class="whitespace-nowrap">&ldquo;?&rdquo;</span> above for an example. Accepts PDF, Word documents, and photos &mdash; you can attach more than one file, up to 10 MB combined. Compress large files before uploading.</p>
               <input id="vet-benefits-letter" name="benefits_letter" type="file" required multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.heic,.webp"
                 class="mt-2 w-full rounded-card border border-navy/25 bg-cream px-4 py-3 font-body text-body text-navy file:mr-4 file:rounded-card file:border-0 file:bg-navy file:px-4 file:py-2 file:font-body file:text-label file:uppercase file:text-cream file:transition-colors hover:file:bg-navy-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold" />
             </div>
@@ -480,7 +480,7 @@
 
         <div data-form-confirm class="hidden rounded-panel border border-navy/12 bg-taupe/40 p-8">
           <p class="font-display text-h3 uppercase text-navy">Application received.</p>
-          <p class="mt-3 font-body text-body text-navy/75">Thank you. Our team reads every application. We'll be in touch about next steps &mdash; and if we need to verify anything, we'll reach out directly rather than asking you to send documents here.</p>
+          <p class="mt-3 font-body text-body text-navy/75">Thank you. Our team reads every application. We'll be in touch about next steps &mdash; and if we need additional information, we'll reach out directly.</p>
           <p class="mt-3 font-body text-body text-navy/75">Need technical help in the meantime? The <a href="https://discord.gg/pFDE8WThwr" target="_blank" rel="noopener noreferrer" class="link-wipe text-navy">AGB Tech Hub Discord</a> is staffed 24/7.</p>
           <button type="button" data-modal-close class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card bg-gold px-8 py-4 font-body text-label uppercase text-navy transition-colors hover:bg-gold/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold">
             <span class="btn-roll"><span>Done</span><span aria-hidden="true">Done</span></span>
@@ -521,6 +521,7 @@
       field.required = isNominating;
       field.disabled = !isNominating;
     });
+    nominatorFields.querySelectorAll("input, select, textarea").forEach(function (field) { field.disabled = !isNominating; });
     if (emailHint) {
       emailHint.textContent = isNominating
         ? "The best address to reach you (the nominator) about this application."
@@ -541,6 +542,11 @@
     }
   }
 
+  function syncNominating() { var selected = document.querySelector("[data-applicant-type]:checked"); setNominating(!!selected && selected.value === "Nominating a veteran"); }
+  syncNominating();
+  window.addEventListener("pageshow", syncNominating);
+  var upload = document.getElementById("vet-benefits-letter");
+  if (upload) { upload.addEventListener("change", function () { var bytes = Array.from(upload.files).reduce(function (sum, file) { return sum + file.size; }, 0); upload.setCustomValidity(bytes > 10000000 ? "Attachments must total 10 MB or less." : ""); if (bytes > 10000000) upload.reportValidity(); }); }
   radios.forEach(function (radio) {
     radio.addEventListener("change", function () {
       setNominating(radio.value === "Nominating a veteran" && radio.checked);
@@ -598,7 +604,7 @@
           <li><span class="font-body text-small text-cream/70">EIN 42-1953879</span></li>
           <li><a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Contact, via Discord</a></li>
         </ul>
-        <p class="mt-6 max-w-text font-body text-small text-cream/50">Built for AAA contrast and full keyboard operability. Found something that doesn't work? Tell us on Discord.</p>
+        <p class="mt-6 max-w-text font-body text-small text-cream/50">Accessibility matters to us. Found something that doesn't work? Tell us on Discord.</p>
       </div>
     </div>
     <div class="mt-16 border-t border-cream/10 pt-8">
