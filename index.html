@@ -153,7 +153,7 @@
 </head>
 <body class="overflow-x-hidden bg-navy font-body text-body text-navy antialiased">
 
-<div id="preloader" aria-hidden="true">
+<div id="preloader" aria-hidden="true" hidden>
   <span class="font-display font-stretch-expanded text-h3 text-gold">AGB</span>
 </div>
 
@@ -238,7 +238,7 @@
     </a>
   </div>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
 <!-- ============ 1. HERO ============ -->
 <section id="top" aria-labelledby="hero-heading" class="hero-section relative isolate flex min-h-screen items-center overflow-hidden bg-linear-to-b from-navy-light to-navy">
@@ -328,7 +328,7 @@
 
       <!-- absolutely placed so it can travel without shifting the copy -->
       <div data-count-layer class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <span data-count-giant aria-hidden="true" class="count-giant block font-display font-stretch-expanded tabular-nums leading-[0.82] text-navy">0</span>
+        <span data-count-giant aria-hidden="true" class="count-giant block font-display font-stretch-expanded tabular-nums leading-[0.82] text-navy">200+</span>
         <span data-count-caption class="mt-6 block font-body text-eyebrow uppercase text-navy/45">veteran computers built since November 2019</span>
       </div>
 
@@ -589,10 +589,10 @@
 
     <div class="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <p class="font-body text-label uppercase text-navy/50">Live total raised</p>
-        <p data-ledger-stat class="-ml-2 mt-2 font-display font-stretch-expanded text-stat tabular-nums text-navy md:-ml-6 lg:-ml-10">&mdash;</p>
+        <p class="font-body text-label uppercase text-navy/50">Public financial ledger</p>
+        <p data-ledger-stat class="-ml-2 mt-2 font-display font-stretch-expanded text-stat tabular-nums text-navy md:-ml-6 lg:-ml-10"><a href="https://hcb.hackclub.com/always-give-back-military-veterans-charity" class="link-wipe" target="_blank" rel="noopener noreferrer">View ledger</a></p>
         <p class="mt-4 max-w-text font-body text-small text-navy/60">
-          This figure mirrors the live total on AGB's public ledger. It is not shown here until that feed is wired into the page &mdash; a placeholder number would defeat the point of this section.
+          See the public ledger for recorded transactions and current reporting.
         </p>
       </div>
       <div class="lg:col-span-6 lg:col-start-7" data-reveal>
@@ -680,7 +680,7 @@
         <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
         <h3 class="font-display text-h3 uppercase text-navy">Refer a veteran</h3>
         <p class="mt-3 font-body text-small text-navy/70">Know a veteran who could use technology, connection, and support? Help us reach them.</p>
-        <a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Refer someone</span><span aria-hidden="true">Refer someone</span></span><span class="sr-only"> (opens in new tab)</span></a>
+        <a href="/apply" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Refer someone</span><span aria-hidden="true">Refer someone</span></span></a>
       </article>
       <article id="request-a-pc" data-deal-card class="group relative overflow-hidden rounded-card border border-navy/12 bg-cream p-8 transition-colors duration-500 hover:border-navy/30">
         <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
@@ -692,7 +692,7 @@
         <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 ease-out-expo group-hover:scale-x-100"></span>
         <h3 class="font-display text-h3 uppercase text-navy">Stream for AGB</h3>
         <p class="mt-3 font-body text-small text-navy/70">Join the ambassador network raising for veteran builds on Kick, Twitch, and YouTube.</p>
-        <a href="https://kick.com/agb_charity" target="_blank" rel="noopener noreferrer" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Watch AGB on Kick</span><span aria-hidden="true">Watch AGB on Kick</span></span><span class="sr-only"> (opens in new tab)</span></a>
+        <a href="/volunteer" class="btn btn--on-light mt-6 inline-flex items-center justify-center gap-2 rounded-card border border-navy/30 px-6 py-3 font-body text-label uppercase text-navy transition-colors hover:bg-navy/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"><span class="btn-roll"><span>Join the creator program</span><span aria-hidden="true">Join the creator program</span></span></a>
       </article>
     </div>
   </div>
@@ -770,7 +770,7 @@
           <li><span class="font-body text-small text-cream/70">EIN 42-1953879</span></li>
           <li><a href="https://discord.gg/alwaysgiveback" target="_blank" rel="noopener noreferrer" class="font-body text-small text-cream/70 hover:text-gold">Contact, via Discord</a></li>
         </ul>
-        <p class="mt-6 max-w-text font-body text-small text-cream/50">Built for AAA contrast and full keyboard operability. Found something that doesn't work? Tell us on Discord.</p>
+        <p class="mt-6 max-w-text font-body text-small text-cream/50">Accessibility matters to us. Found something that doesn't work? Tell us on Discord.</p>
       </div>
     </div>
     <div class="mt-16 border-t border-cream/10 pt-8">
