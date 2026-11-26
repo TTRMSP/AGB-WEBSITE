@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
 <!-- Google Tag Manager -->
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WR46WGXV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WR46WGXV');</script>
 <!-- End Google Tag Manager -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -113,7 +112,10 @@
 
 <script>
 /* Runs before the body paints. Anything animated in from a hidden state has to
-   start hidden in CSS, not in JS: main.js is at the end of <body>, so by the
+   start hidden in CSS, not in JS: main.js is at the end of <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR46WGXV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->, so by the
    time it arms anything the browser has already painted a full frame of every
    section in its finished state. That is the flash of finished content -- copy
    appears, then snaps back to the start and animates in.
